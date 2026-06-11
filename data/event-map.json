@@ -1,0 +1,180 @@
+{
+  "description": "事件→上游原料→受益标的 映射表",
+  "version": "1.0",
+  "updated": "2026-06-11",
+
+  "events": {
+    "停产": {
+      "label": "停产/断供事件",
+      "score_base": 5,
+      "description": "供给端收缩，利好替代厂商或上游资源商"
+    },
+    "涨价": {
+      "label": "涨价事件",
+      "score_base": 4,
+      "description": "产品涨价直接增厚利润，利好相关企业"
+    },
+    "管制": {
+      "label": "出口管制事件",
+      "score_base": 5,
+      "description": "供给受限，利好国内上下游和国产替代"
+    },
+    "扩产": {
+      "label": "扩产/产能事件",
+      "score_base": 3,
+      "description": "产能扩张利好设备商或上游原料商"
+    },
+    "发现": {
+      "label": "矿产发现/重大突破",
+      "score_base": 3,
+      "description": "资源储量增加，利好相关企业"
+    }
+  },
+
+  "materials": {
+    "六氟化钨": {
+      "raw_material": "高纯钨粉",
+      "upstream_sector": "钨矿开采/冶炼",
+      "description": "芯片制造核心电子特气，用于7nm以下制程CVD沉积",
+      "price_keywords": ["六氟化钨", "钨粉", "钨精矿"],
+      "stocks": [
+        {"name": "翔鹭钨业", "code": "002842", "role": "上游钨矿"},
+        {"name": "章源钨业", "code": "002378", "role": "上游钨矿"},
+        {"name": "厦门钨业", "code": "600549", "role": "上游钨矿"},
+        {"name": "中钨高新", "code": "000657", "role": "上游钨矿"},
+        {"name": "中船特气", "code": "688146", "role": "中游气体龙头"},
+        {"name": "昊华科技", "code": "600378", "role": "中游气体"}
+      ],
+      "links": [
+        {"event": "停产", "impact": "供给缺口扩大，利好国内钨企和气体厂商"}
+      ]
+    },
+    "钨": {
+      "raw_material": "钨精矿",
+      "upstream_sector": "钨矿开采",
+      "description": "工业牙齿，用于硬质合金、军工、光伏钨丝",
+      "price_keywords": ["钨精矿", "黑钨精矿", "钨粉", "APT"],
+      "stocks": [
+        {"name": "翔鹭钨业", "code": "002842", "role": "全产业链"},
+        {"name": "章源钨业", "code": "002378", "role": "全产业链"},
+        {"name": "厦门钨业", "code": "600549", "role": "全产业链龙头"},
+        {"name": "中钨高新", "code": "000657", "role": "全产业链"}
+      ],
+      "links": [
+        {"event": "停产", "impact": "海外停产→涨价→利好国内钨企"},
+        {"event": "管制", "impact": "出口管制→供给偏紧→钨价上行"},
+        {"event": "涨价", "impact": "直接增厚利润"}
+      ]
+    },
+    "锗": {
+      "raw_material": "锗锭",
+      "upstream_sector": "锗矿开采/冶炼",
+      "description": "红外光学、光纤通信、半导体衬底关键材料",
+      "price_keywords": ["锗锭", "二氧化锗", "锗"],
+      "stocks": [
+        {"name": "云南锗业", "code": "002428", "role": "龙头"},
+        {"name": "驰宏锌锗", "code": "600497", "role": "伴生锗生产"},
+        {"name": "中金岭南", "code": "000060", "role": "伴生锗生产"}
+      ],
+      "links": [
+        {"event": "管制", "impact": "出口管制→锗价上涨→利好国内锗企"},
+        {"event": "涨价", "impact": "直接增厚利润"}
+      ]
+    },
+    "稀土": {
+      "raw_material": "稀土氧化物",
+      "upstream_sector": "稀土开采/冶炼",
+      "description": "战略资源，用于永磁材料、新能源车、风电",
+      "price_keywords": ["氧化镨钕", "镝", "铽", "稀土"],
+      "stocks": [
+        {"name": "北方稀土", "code": "600010", "role": "轻稀土龙头"},
+        {"name": "中国稀土", "code": "000831", "role": "中重稀土龙头"},
+        {"name": "盛和资源", "code": "600392", "role": "全产业链"}
+      ],
+      "links": [
+        {"event": "管制", "impact": "出口管制→稀土涨价→利好国内稀土企业"}
+      ]
+    },
+    "镓": {
+      "raw_material": "金属镓",
+      "upstream_sector": "镓提炼",
+      "description": "半导体、LED、光伏关键原材料，中国占全球98%产量",
+      "price_keywords": ["镓", "金属镓"],
+      "stocks": [
+        {"name": "中国铝业", "code": "601600", "role": "镓伴生生产"},
+        {"name": "蓝晓科技", "code": "300487", "role": "镓提取技术"}
+      ],
+      "links": [
+        {"event": "管制", "impact": "出口管制→镓价上涨→利好生产企业"}
+      ]
+    },
+    "锑": {
+      "raw_material": "锑锭",
+      "upstream_sector": "锑矿开采",
+      "description": "阻燃剂、军工、光伏玻璃澄清剂",
+      "price_keywords": ["锑锭", "氧化锑", "锑"],
+      "stocks": [
+        {"name": "华钰矿业", "code": "601020", "role": "锑矿龙头"},
+        {"name": "湖南黄金", "code": "002155", "role": "锑伴生生产"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "锑价上涨直接增厚利润"}
+      ]
+    },
+    "钼": {
+      "raw_material": "钼精矿",
+      "upstream_sector": "钼矿开采",
+      "description": "钢铁添加剂、军工合金、石化催化剂",
+      "price_keywords": ["钼精矿", "氧化钼", "钼铁"],
+      "stocks": [
+        {"name": "金钼股份", "code": "601958", "role": "钼业龙头"},
+        {"name": "洛阳钼业", "code": "603993", "role": "钼+铜钴"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "钼价上涨直接增厚利润"}
+      ]
+    },
+    "电子特气": {
+      "raw_material": "多种高纯气体/金属",
+      "upstream_sector": "化工/金属精炼",
+      "description": "半导体制造关键耗材，国产替代空间大",
+      "price_keywords": ["六氟化钨", "电子特气", "特种气体"],
+      "stocks": [
+        {"name": "中船特气", "code": "688146", "role": "电子特气龙头"},
+        {"name": "华特气体", "code": "688268", "role": "电子特气"},
+        {"name": "昊华科技", "code": "600378", "role": "电子特气"},
+        {"name": "中巨芯", "code": "688549", "role": "电子湿化学品"},
+        {"name": "和远气体", "code": "002971", "role": "电子特气新秀"}
+      ],
+      "links": [
+        {"event": "停产", "impact": "海外停产→国产替代加速→利好国内气体厂商"},
+        {"event": "涨价", "impact": "量价齐升，直接增厚利润"}
+      ]
+    }
+  },
+
+  "keywords": [
+    {"word": "六氟化钨", "type": "停产", "material": "六氟化钨"},
+    {"word": "钨", "type": "停产", "material": "钨"},
+    {"word": "钨精矿", "type": "涨价", "material": "钨"},
+    {"word": "钨粉", "type": "涨价", "material": "钨"},
+    {"word": "翔鹭钨业", "type": "涨价", "material": "钨"},
+    {"word": "章源钨业", "type": "涨价", "material": "钨"},
+    {"word": "稀土", "type": "管制", "material": "稀土"},
+    {"word": "锗", "type": "管制", "material": "锗"},
+    {"word": "镓", "type": "管制", "material": "镓"},
+    {"word": "锑", "type": "涨价", "material": "锑"},
+    {"word": "钼", "type": "涨价", "material": "钼"},
+    {"word": "电子特气", "type": "停产", "material": "电子特气"},
+    {"word": "特种气体", "type": "涨价", "material": "电子特气"},
+    {"word": "出口管制", "type": "管制", "material": null},
+    {"word": "断供", "type": "停产", "material": null},
+    {"word": "停产", "type": "停产", "material": null},
+    {"word": "涨价", "type": "涨价", "material": null},
+    {"word": "永久停产", "type": "停产", "material": null},
+    {"word": "供应短缺", "type": "停产", "material": null},
+    {"word": "供需缺口", "type": "涨价", "material": null},
+    {"word": "扩产", "type": "扩产", "material": null},
+    {"word": "产能", "type": "扩产", "material": null}
+  ]
+}

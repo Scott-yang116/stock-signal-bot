@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 30,
+      "memory": 256
+    }
+  },
+  "env": {
+    "FEISHU_APP_ID": "@feishu-app-id",
+    "FEISHU_APP_SECRET": "@feishu-app-secret"
+  }
+}

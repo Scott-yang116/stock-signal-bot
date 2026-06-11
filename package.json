@@ -1,0 +1,12 @@
+{
+  "name": "stock-signal-bot",
+  "version": "1.0.0",
+  "description": "飞书信号机器人 - 新闻事件→交易信号分析",
+  "main": "api/webhook.js",
+  "scripts": {
+    "dev": "node api/webhook.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.0"
+  }
+}
