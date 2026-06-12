@@ -32,6 +32,11 @@ function getSearch() {
 }
 
 module.exports = async function handler(req, res) {
+  // GET 请求用于冷启动预热（cron-job.org 等外部服务定时 ping）
+  if (req.method === 'GET') {
+    return res.status(200).json({ status: 'ok', uptime: process.uptime() });
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
