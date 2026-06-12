@@ -1,7 +1,7 @@
 {
   "description": "事件→上游原料→受益标的 映射表",
-  "version": "1.0",
-  "updated": "2026-06-11",
+  "version": "2.0",
+  "updated": "2026-06-12",
 
   "events": {
     "停产": {
@@ -28,6 +28,31 @@
       "label": "矿产发现/重大突破",
       "score_base": 3,
       "description": "资源储量增加，利好相关企业"
+    },
+    "政策利好": {
+      "label": "政策利好事件",
+      "score_base": 4,
+      "description": "国家政策支持，利好行业发展"
+    },
+    "政策利空": {
+      "label": "政策利空事件",
+      "score_base": 4,
+      "description": "政策收紧，利空相关行业"
+    },
+    "需求爆发": {
+      "label": "需求爆发事件",
+      "score_base": 4,
+      "description": "下游需求激增，利好上游供应链"
+    },
+    "技术突破": {
+      "label": "技术突破事件",
+      "score_base": 3,
+      "description": "技术革新带来新市场空间"
+    },
+    "灾难": {
+      "label": "自然灾害/事故",
+      "score_base": 4,
+      "description": "供给意外中断，利好替代/竞品厂商"
     }
   },
 
@@ -46,7 +71,8 @@
         {"name": "昊华科技", "code": "600378", "role": "中游气体"}
       ],
       "links": [
-        {"event": "停产", "impact": "供给缺口扩大，利好国内钨企和气体厂商"}
+        {"event": "停产", "impact": "供给缺口扩大，利好国内钨企和气体厂商"},
+        {"event": "涨价", "impact": "量价齐升，直接增厚利润"}
       ]
     },
     "钨": {
@@ -58,7 +84,8 @@
         {"name": "翔鹭钨业", "code": "002842", "role": "全产业链"},
         {"name": "章源钨业", "code": "002378", "role": "全产业链"},
         {"name": "厦门钨业", "code": "600549", "role": "全产业链龙头"},
-        {"name": "中钨高新", "code": "000657", "role": "全产业链"}
+        {"name": "中钨高新", "code": "000657", "role": "全产业链"},
+        {"name": "湖南黄金", "code": "002155", "role": "伴生钨生产"}
       ],
       "links": [
         {"event": "停产", "impact": "海外停产→涨价→利好国内钨企"},
@@ -72,7 +99,7 @@
       "description": "红外光学、光纤通信、半导体衬底关键材料",
       "price_keywords": ["锗锭", "二氧化锗", "锗"],
       "stocks": [
-        {"name": "云南锗业", "code": "002428", "role": "龙头"},
+        {"name": "云南锗业", "code": "002428", "role": "锗龙头"},
         {"name": "驰宏锌锗", "code": "600497", "role": "伴生锗生产"},
         {"name": "中金岭南", "code": "000060", "role": "伴生锗生产"}
       ],
@@ -84,15 +111,19 @@
     "稀土": {
       "raw_material": "稀土氧化物",
       "upstream_sector": "稀土开采/冶炼",
-      "description": "战略资源，用于永磁材料、新能源车、风电",
+      "description": "战略资源，用于永磁材料、新能源车、风电、机器人",
       "price_keywords": ["氧化镨钕", "镝", "铽", "稀土"],
       "stocks": [
         {"name": "北方稀土", "code": "600010", "role": "轻稀土龙头"},
         {"name": "中国稀土", "code": "000831", "role": "中重稀土龙头"},
-        {"name": "盛和资源", "code": "600392", "role": "全产业链"}
+        {"name": "盛和资源", "code": "600392", "role": "全产业链"},
+        {"name": "广晟有色", "code": "600259", "role": "中重稀土"},
+        {"name": "包钢股份", "code": "600010", "role": "稀土尾矿资源"}
       ],
       "links": [
-        {"event": "管制", "impact": "出口管制→稀土涨价→利好国内稀土企业"}
+        {"event": "管制", "impact": "出口管制→稀土涨价→利好国内稀土企业"},
+        {"event": "涨价", "impact": "价格上行直接增厚利润"},
+        {"event": "需求爆发", "impact": "新能源/机器人需求拉动稀土消费"}
       ]
     },
     "镓": {
@@ -115,10 +146,12 @@
       "price_keywords": ["锑锭", "氧化锑", "锑"],
       "stocks": [
         {"name": "华钰矿业", "code": "601020", "role": "锑矿龙头"},
-        {"name": "湖南黄金", "code": "002155", "role": "锑伴生生产"}
+        {"name": "湖南黄金", "code": "002155", "role": "锑伴生生产"},
+        {"name": "华锡有色", "code": "600301", "role": "锑/锡生产"}
       ],
       "links": [
-        {"event": "涨价", "impact": "锑价上涨直接增厚利润"}
+        {"event": "涨价", "impact": "锑价上涨直接增厚利润"},
+        {"event": "管制", "impact": "出口管制→锑价上涨"}
       ]
     },
     "钼": {
@@ -128,7 +161,8 @@
       "price_keywords": ["钼精矿", "氧化钼", "钼铁"],
       "stocks": [
         {"name": "金钼股份", "code": "601958", "role": "钼业龙头"},
-        {"name": "洛阳钼业", "code": "603993", "role": "钼+铜钴"}
+        {"name": "洛阳钼业", "code": "603993", "role": "钼+铜钴"},
+        {"name": "吉翔股份", "code": "603399", "role": "钼精矿生产"}
       ],
       "links": [
         {"event": "涨价", "impact": "钼价上涨直接增厚利润"}
@@ -144,11 +178,520 @@
         {"name": "华特气体", "code": "688268", "role": "电子特气"},
         {"name": "昊华科技", "code": "600378", "role": "电子特气"},
         {"name": "中巨芯", "code": "688549", "role": "电子湿化学品"},
-        {"name": "和远气体", "code": "002971", "role": "电子特气新秀"}
+        {"name": "和远气体", "code": "002971", "role": "电子特气新秀"},
+        {"name": "金宏气体", "code": "688106", "role": "电子特气"}
       ],
       "links": [
         {"event": "停产", "impact": "海外停产→国产替代加速→利好国内气体厂商"},
         {"event": "涨价", "impact": "量价齐升，直接增厚利润"}
+      ]
+    },
+    "锂": {
+      "raw_material": "碳酸锂/氢氧化锂",
+      "upstream_sector": "锂矿开采/盐湖提锂",
+      "description": "新能源车电池核心原料，储能需求爆发",
+      "price_keywords": ["碳酸锂", "氢氧化锂", "锂矿", "锂盐", "锂精矿"],
+      "stocks": [
+        {"name": "赣锋锂业", "code": "002460", "role": "锂业龙头"},
+        {"name": "天齐锂业", "code": "002466", "role": "锂矿资源龙头"},
+        {"name": "永兴材料", "code": "002756", "role": "云母提锂"},
+        {"name": "中矿资源", "code": "002738", "role": "锂矿新贵"},
+        {"name": "盛新锂能", "code": "002240", "role": "锂盐生产"},
+        {"name": "盐湖股份", "code": "000792", "role": "盐湖提锂龙头"},
+        {"name": "藏格矿业", "code": "000408", "role": "盐湖提锂"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "锂盐涨价直接增厚利润"},
+        {"event": "需求爆发", "impact": "新能源车/储能需求拉动锂消费"},
+        {"event": "停产", "impact": "海外锂矿停产→供给收缩→利好国内锂企"},
+        {"event": "政策利好", "impact": "新能源政策支持利好锂需求"}
+      ]
+    },
+    "硅": {
+      "raw_material": "工业硅/多晶硅",
+      "upstream_sector": "硅料/有机硅",
+      "description": "光伏产业基石，也用于有机硅、半导体",
+      "price_keywords": ["工业硅", "多晶硅", "有机硅", "硅料", "金属硅"],
+      "stocks": [
+        {"name": "合盛硅业", "code": "603260", "role": "工业硅+有机硅龙头"},
+        {"name": "通威股份", "code": "600438", "role": "多晶硅龙头"},
+        {"name": "大全能源", "code": "688303", "role": "多晶硅"},
+        {"name": "协鑫科技", "code": "03800", "role": "颗粒硅龙头"},
+        {"name": "新安股份", "code": "600596", "role": "有机硅/草甘膦"},
+        {"name": "兴发集团", "code": "600141", "role": "有机硅+磷化工"},
+        {"name": "东岳硅材", "code": "300821", "role": "有机硅"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "硅料涨价直接增厚利润"},
+        {"event": "需求爆发", "impact": "光伏装机需求拉动硅料消费"},
+        {"event": "停产", "impact": "停产→供给收缩→硅价上行"},
+        {"event": "政策利好", "impact": "光伏政策利好硅料需求"}
+      ]
+    },
+    "铜": {
+      "raw_material": "电解铜/铜精矿",
+      "upstream_sector": "铜矿开采/冶炼",
+      "description": "工业金属之王，用于电力、新能源车、基建",
+      "price_keywords": ["电解铜", "铜精矿", "沪铜", "阴极铜", "铜价"],
+      "stocks": [
+        {"name": "紫金矿业", "code": "601899", "role": "铜金龙头"},
+        {"name": "洛阳钼业", "code": "603993", "role": "铜钴生产"},
+        {"name": "江西铜业", "code": "600362", "role": "铜冶炼龙头"},
+        {"name": "铜陵有色", "code": "000630", "role": "铜冶炼"},
+        {"name": "云南铜业", "code": "000878", "role": "铜冶炼"},
+        {"name": "西部矿业", "code": "601168", "role": "铜矿生产"},
+        {"name": "金诚信", "code": "603979", "role": "铜矿开发"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "铜价上涨直接增厚利润"},
+        {"event": "需求爆发", "impact": "新能源/电网投资拉动铜需求"},
+        {"event": "停产", "impact": "海外铜矿停产→供给偏紧→铜价上行"},
+        {"event": "管制", "impact": "铜资源战略管控→利好国内铜企"}
+      ]
+    },
+    "铝": {
+      "raw_material": "电解铝/氧化铝",
+      "upstream_sector": "铝土矿/电解铝",
+      "description": "轻量化金属，用于新能源车、光伏边框、航空",
+      "price_keywords": ["电解铝", "氧化铝", "沪铝", "铝锭", "铝价"],
+      "stocks": [
+        {"name": "中国铝业", "code": "601600", "role": "铝业龙头"},
+        {"name": "云铝股份", "code": "000807", "role": "水电铝龙头"},
+        {"name": "神火股份", "code": "000933", "role": "电解铝"},
+        {"name": "南山铝业", "code": "600219", "role": "铝加工龙头"},
+        {"name": "天山铝业", "code": "002532", "role": "电解铝"},
+        {"name": "明泰铝业", "code": "601677", "role": "铝板带箔"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "铝价上涨直接增厚利润"},
+        {"event": "停产", "impact": "限电/停产→供给收缩→铝价上行"},
+        {"event": "需求爆发", "impact": "新能源车轻量化拉动铝需求"}
+      ]
+    },
+    "磷": {
+      "raw_material": "磷矿石/磷酸",
+      "upstream_sector": "磷矿开采/磷化工",
+      "description": "化肥原料，磷酸铁锂电池材料，新能源材料",
+      "price_keywords": ["磷矿石", "磷酸", "磷肥", "磷酸铁锂", "草甘膦", "黄磷"],
+      "stocks": [
+        {"name": "云天化", "code": "600096", "role": "磷肥+磷酸铁龙头"},
+        {"name": "兴发集团", "code": "600141", "role": "磷化工龙头"},
+        {"name": "湖北宜化", "code": "000422", "role": "磷化工"},
+        {"name": "新洋丰", "code": "000902", "role": "磷复肥龙头"},
+        {"name": "云图控股", "code": "002539", "role": "磷矿+复合肥"},
+        {"name": "川发龙蟒", "code": "002312", "role": "磷酸铁锂材料"},
+        {"name": "川恒股份", "code": "002895", "role": "磷矿+磷酸铁"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "磷化工涨价直接增厚利润"},
+        {"event": "需求爆发", "impact": "磷酸铁锂需求拉动磷化工"},
+        {"event": "管制", "impact": "磷矿出口管制→国内磷企利好"},
+        {"event": "停产", "impact": "黄磷停产→磷化工涨价"}
+      ]
+    },
+    "纯碱": {
+      "raw_material": "纯碱/碳酸钠",
+      "upstream_sector": "纯碱生产",
+      "description": "光伏玻璃核心原料，也用于浮法玻璃、洗涤",
+      "price_keywords": ["纯碱", "碳酸钠", "重质纯碱", "轻质纯碱"],
+      "stocks": [
+        {"name": "远兴能源", "code": "000683", "role": "天然碱龙头"},
+        {"name": "山东海化", "code": "000822", "role": "纯碱龙头"},
+        {"name": "三友化工", "code": "600409", "role": "纯碱+粘胶"},
+        {"name": "中盐化工", "code": "600328", "role": "纯碱生产"},
+        {"name": "华昌化工", "code": "002274", "role": "纯碱生产"},
+        {"name": "双环科技", "code": "000707", "role": "纯碱生产"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "纯碱涨价直接增厚利润"},
+        {"event": "需求爆发", "impact": "光伏玻璃投产拉动纯碱需求"},
+        {"event": "停产", "impact": "检修/限产→纯碱供给偏紧"}
+      ]
+    },
+    "钴": {
+      "raw_material": "电解钴/钴精矿",
+      "upstream_sector": "钴矿开采/冶炼",
+      "description": "三元电池正极材料，用于消费电子、新能源车",
+      "price_keywords": ["电解钴", "钴精矿", "钴价", "金属钴", "硫酸钴"],
+      "stocks": [
+        {"name": "华友钴业", "code": "600516", "role": "钴业龙头"},
+        {"name": "寒锐钴业", "code": "300618", "role": "钴生产"},
+        {"name": "洛阳钼业", "code": "603993", "role": "钴矿资源"},
+        {"name": "腾远钴业", "code": "301219", "role": "钴冶炼"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "钴价上涨直接增厚利润"},
+        {"event": "需求爆发", "impact": "新能源车/消费电子拉动钴需求"},
+        {"event": "停产", "impact": "刚果金钴矿停产→供给冲击"}
+      ]
+    },
+    "镍": {
+      "raw_material": "电解镍/镍铁",
+      "upstream_sector": "镍矿/镍冶炼",
+      "description": "不锈钢原料，三元电池正极材料",
+      "price_keywords": ["电解镍", "镍铁", "沪镍", "硫酸镍", "镍价"],
+      "stocks": [
+        {"name": "华友钴业", "code": "600516", "role": "镍钴龙头"},
+        {"name": "青山系", "code": "", "role": "镍铁龙头(未上市)"},
+        {"name": "盛屯矿业", "code": "600711", "role": "镍矿生产"},
+        {"name": "青岛中程", "code": "300208", "role": "镍矿资源"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "镍价上涨直接增厚利润"},
+        {"event": "停产", "impact": "海外镍矿停产→供给收缩"},
+        {"event": "管制", "impact": "镍资源战略管控"}
+      ]
+    },
+    "天然气": {
+      "raw_material": "液化天然气(LNG)/管道气",
+      "upstream_sector": "油气开采/贸易",
+      "description": "清洁能源，用于发电、工业燃料、城市燃气",
+      "price_keywords": ["天然气", "LNG", "液化天然气", "燃气", "气价"],
+      "stocks": [
+        {"name": "中国海油", "code": "600938", "role": "海上油气龙头"},
+        {"name": "广汇能源", "code": "600256", "role": "LNG贸易"},
+        {"name": "新奥股份", "code": "600803", "role": "燃气分销龙头"},
+        {"name": "深圳燃气", "code": "601139", "role": "城市燃气"},
+        {"name": "佛燃能源", "code": "002911", "role": "城市燃气"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "气价上涨直接增厚利润"},
+        {"event": "停产", "impact": "海外气田停产→LNG涨价"},
+        {"event": "政策利好", "impact": "清洁能源政策利好天然气"}
+      ]
+    },
+    "尿素": {
+      "raw_material": "尿素",
+      "upstream_sector": "煤化工/气头化工",
+      "description": "氮肥核心品种，保障粮食安全",
+      "price_keywords": ["尿素", "氮肥", "尿素价格"],
+      "stocks": [
+        {"name": "华鲁恒升", "code": "600426", "role": "煤化工龙头"},
+        {"name": "四川美丰", "code": "000731", "role": "尿素生产"},
+        {"name": "泸天化", "code": "000912", "role": "尿素龙头"},
+        {"name": "湖北宜化", "code": "000422", "role": "尿素+磷化工"},
+        {"name": "云天化", "code": "600096", "role": "尿素+磷肥"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "尿素涨价直接增厚利润"},
+        {"event": "政策利好", "impact": "春耕/粮食安全政策利好尿素"}
+      ]
+    },
+    "氟化工": {
+      "raw_material": "萤石/氢氟酸",
+      "upstream_sector": "氟化工/制冷剂",
+      "description": "制冷剂、新能源车电池、氟聚合物关键原料",
+      "price_keywords": ["萤石", "氢氟酸", "制冷剂", "氟化工", "R32", "R125", "R134a"],
+      "stocks": [
+        {"name": "巨化股份", "code": "600160", "role": "氟化工龙头"},
+        {"name": "永和股份", "code": "605020", "role": "制冷剂"},
+        {"name": "三美股份", "code": "603379", "role": "制冷剂"},
+        {"name": "东岳集团", "code": "00189", "role": "氟硅材料龙头"},
+        {"name": "金石资源", "code": "603979", "role": "萤石资源龙头"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "制冷剂/氟化工涨价直接利好"},
+        {"event": "管制", "impact": "萤石出口管制→氟化工受益"},
+        {"event": "停产", "impact": "供给收缩→氟化工涨价"},
+        {"event": "政策利好", "impact": "新能源车电池需求拉动氟化工"}
+      ]
+    },
+    "原油": {
+      "raw_material": "原油/石油",
+      "upstream_sector": "石油开采/炼化",
+      "description": "工业血液，影响整个化工产业链",
+      "price_keywords": ["原油", "石油", "油价", "WTI", "布伦特"],
+      "stocks": [
+        {"name": "中国石油", "code": "601857", "role": "油气龙头"},
+        {"name": "中国海油", "code": "600938", "role": "海上油气龙头"},
+        {"name": "中国石化", "code": "600028", "role": "炼化龙头"},
+        {"name": "广汇能源", "code": "600256", "role": "油气资源"},
+        {"name": "中曼石油", "code": "603619", "role": "油气服务"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "油价上涨直接增厚利润"},
+        {"event": "停产", "impact": "OPEC减产/地缘冲突→油价上行"},
+        {"event": "政策利好", "impact": "能源安全政策利好油气"}
+      ]
+    },
+    "黄金": {
+      "raw_material": "黄金",
+      "upstream_sector": "黄金开采",
+      "description": "避险资产，全球央行持续增持",
+      "price_keywords": ["黄金", "金价", "伦敦金", "COMEX", "黄金价格"],
+      "stocks": [
+        {"name": "紫金矿业", "code": "601899", "role": "黄金龙头"},
+        {"name": "山东黄金", "code": "600547", "role": "黄金龙头"},
+        {"name": "中金黄金", "code": "600489", "role": "黄金生产"},
+        {"name": "赤峰黄金", "code": "600988", "role": "黄金生产"},
+        {"name": "银泰黄金", "code": "000975", "role": "黄金+白银"},
+        {"name": "湖南黄金", "code": "002155", "role": "黄金+锑"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "金价上涨直接增厚利润"},
+        {"event": "政策利好", "impact": "央行增持黄金→金价支撑"}
+      ]
+    },
+    "白银": {
+      "raw_material": "白银",
+      "upstream_sector": "白银开采/冶炼",
+      "description": "工业+金融双重属性，光伏银浆核心原料",
+      "price_keywords": ["白银", "银价", "伦敦银", "COMEX银"],
+      "stocks": [
+        {"name": "兴业银锡", "code": "000426", "role": "白银龙头"},
+        {"name": "银泰黄金", "code": "000975", "role": "白银+黄金"},
+        {"name": "盛达资源", "code": "000603", "role": "白银生产"},
+        {"name": "国城矿业", "code": "000688", "role": "铅锌银矿"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "银价上涨直接增厚利润"},
+        {"event": "需求爆发", "impact": "光伏银浆需求拉动白银消费"}
+      ]
+    },
+    "煤炭": {
+      "raw_material": "动力煤/焦煤",
+      "upstream_sector": "煤炭开采",
+      "description": "能源基石，电厂/钢铁/化工核心原料",
+      "price_keywords": ["动力煤", "焦煤", "焦炭", "煤价", "煤炭"],
+      "stocks": [
+        {"name": "中国神华", "code": "601088", "role": "煤炭龙头"},
+        {"name": "陕西煤业", "code": "601225", "role": "动力煤龙头"},
+        {"name": "兖矿能源", "code": "600188", "role": "煤炭+化工"},
+        {"name": "中煤能源", "code": "601898", "role": "煤炭生产"},
+        {"name": "山西焦煤", "code": "000983", "role": "焦煤龙头"},
+        {"name": "平煤股份", "code": "601666", "role": "焦煤生产"},
+        {"name": "淮北矿业", "code": "600985", "role": "焦煤+化工"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "煤价上涨直接增厚利润"},
+        {"event": "停产", "impact": "煤矿事故/安检→供给收缩→煤价上行"},
+        {"event": "政策利好", "impact": "能源保供政策价值重估"}
+      ]
+    },
+    "钢铁": {
+      "raw_material": "铁矿石/钢材",
+      "upstream_sector": "钢铁冶炼",
+      "description": "工业基础材料，基建/地产/制造核心",
+      "price_keywords": ["螺纹钢", "热卷", "铁矿石", "钢价", "钢材"],
+      "stocks": [
+        {"name": "宝钢股份", "code": "600019", "role": "钢铁龙头"},
+        {"name": "鞍钢股份", "code": "000898", "role": "钢铁生产"},
+        {"name": "河钢资源", "code": "000709", "role": "铁矿石资源"},
+        {"name": "首钢股份", "code": "000959", "role": "钢铁生产"},
+        {"name": "华菱钢铁", "code": "000932", "role": "钢铁生产"},
+        {"name": "包钢股份", "code": "600010", "role": "钢铁+稀土"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "钢价上涨直接增厚利润"},
+        {"event": "停产", "impact": "限产→供给收缩→钢价上行"},
+        {"event": "需求爆发", "impact": "基建/制造业拉动钢铁需求"}
+      ]
+    },
+    "造纸": {
+      "raw_material": "纸浆/废纸",
+      "upstream_sector": "造纸/纸浆",
+      "description": "包装/文化纸，消费晴雨表",
+      "price_keywords": ["纸浆", "废纸", "白卡纸", "瓦楞纸", "纸价"],
+      "stocks": [
+        {"name": "太阳纸业", "code": "002078", "role": "造纸龙头"},
+        {"name": "晨鸣纸业", "code": "000488", "role": "造纸龙头"},
+        {"name": "山鹰国际", "code": "600567", "role": "包装纸龙头"},
+        {"name": "博汇纸业", "code": "600966", "role": "白卡纸龙头"},
+        {"name": "岳阳林纸", "code": "600963", "role": "文化纸"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "纸价上涨直接增厚利润"},
+        {"event": "需求爆发", "impact": "消费复苏拉动包装纸需求"}
+      ]
+    },
+    "橡胶": {
+      "raw_material": "天然橡胶/合成橡胶",
+      "upstream_sector": "橡胶种植/化工",
+      "description": "轮胎/汽车零部件核心原料",
+      "price_keywords": ["天然橡胶", "合成橡胶", "橡胶", "轮胎"],
+      "stocks": [
+        {"name": "海南橡胶", "code": "601118", "role": "天然橡胶龙头"},
+        {"name": "中化国际", "code": "600500", "role": "橡胶贸易"},
+        {"name": "赛轮轮胎", "code": "601058", "role": "轮胎制造"},
+        {"name": "玲珑轮胎", "code": "601966", "role": "轮胎制造"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "橡胶涨价利好上游种植/加工"}
+      ]
+    },
+    "粮食": {
+      "raw_material": "玉米/小麦/大豆",
+      "upstream_sector": "粮食种植/种子",
+      "description": "粮食安全战略品种",
+      "price_keywords": ["玉米", "小麦", "大豆", "粮食", "粮价"],
+      "stocks": [
+        {"name": "北大荒", "code": "600598", "role": "粮食种植龙头"},
+        {"name": "隆平高科", "code": "000998", "role": "种业龙头"},
+        {"name": "登海种业", "code": "002041", "role": "玉米种子"},
+        {"name": "荃银高科", "code": "300087", "role": "种业生产"},
+        {"name": "大北农", "code": "002385", "role": "转基因种业"}
+      ],
+      "links": [
+        {"event": "涨价", "impact": "粮价上涨直接增厚种植收益"},
+        {"event": "政策利好", "impact": "粮食安全政策利好种业"},
+        {"event": "灾难", "impact": "极端天气→粮食减产→涨价"}
+      ]
+    },
+    "光伏": {
+      "raw_material": "光伏组件/逆变器",
+      "upstream_sector": "光伏制造",
+      "description": "清洁能源核心赛道，全球竞争力强",
+      "price_keywords": ["光伏", "组件", "逆变器", "光伏装机", "硅片", "电池片"],
+      "stocks": [
+        {"name": "隆基绿能", "code": "601012", "role": "硅片+组件龙头"},
+        {"name": "通威股份", "code": "600438", "role": "硅料+电池双龙头"},
+        {"name": "阳光电源", "code": "300274", "role": "逆变器龙头"},
+        {"name": "TCL中环", "code": "002129", "role": "硅片龙头"},
+        {"name": "晶澳科技", "code": "002459", "role": "组件龙头"},
+        {"name": "天合光能", "code": "688599", "role": "组件龙头"},
+        {"name": "晶科能源", "code": "688223", "role": "组件龙头"}
+      ],
+      "links": [
+        {"event": "需求爆发", "impact": "光伏装机超预期→全产业链受益"},
+        {"event": "政策利好", "impact": "新能源政策利好光伏"},
+        {"event": "技术突破", "impact": "新技术路线(BC/钙钛矿)突破利好设备商"}
+      ]
+    },
+    "风电": {
+      "raw_material": "风电叶片/齿轮箱",
+      "upstream_sector": "风电制造",
+      "description": "清洁能源，海风潜力巨大",
+      "price_keywords": ["风电", "海上风电", "风机", "叶片", "海风"],
+      "stocks": [
+        {"name": "金风科技", "code": "002202", "role": "风机龙头"},
+        {"name": "远景能源", "code": "", "role": "风机龙头(未上市)"},
+        {"name": "明阳智能", "code": "601615", "role": "风机+海风"},
+        {"name": "三一重能", "code": "688349", "role": "风机新秀"},
+        {"name": "东方电缆", "code": "603606", "role": "海缆龙头"},
+        {"name": "天顺风能", "code": "002531", "role": "风电塔筒"}
+      ],
+      "links": [
+        {"event": "需求爆发", "impact": "海风装机超预期→全产业链受益"},
+        {"event": "政策利好", "impact": "新能源政策利好风电"},
+        {"event": "技术突破", "impact": "大兆瓦风机突破利好供应链"}
+      ]
+    },
+    "新能源汽车": {
+      "raw_material": "电池/电驱/电控",
+      "upstream_sector": "新能源汽车产业链",
+      "description": "汽车产业电动化革命",
+      "price_keywords": ["新能源车", "电动车", "电动汽车", "锂电池", "充电桩"],
+      "stocks": [
+        {"name": "比亚迪", "code": "002594", "role": "新能源车龙头"},
+        {"name": "宁德时代", "code": "300750", "role": "动力电池龙头"},
+        {"name": "亿纬锂能", "code": "300014", "role": "电池龙头"},
+        {"name": "国轩高科", "code": "002074", "role": "磷酸铁锂电池"},
+        {"name": "恩捷股份", "code": "002812", "role": "隔膜龙头"},
+        {"name": "天赐材料", "code": "002709", "role": "电解液龙头"},
+        {"name": "璞泰来", "code": "603659", "role": "负极材料龙头"}
+      ],
+      "links": [
+        {"event": "需求爆发", "impact": "新能源车销量超预期→全产业链受益"},
+        {"event": "政策利好", "impact": "购置税减免/补贴政策利好"},
+        {"event": "技术突破", "impact": "固态电池/快充技术突破利好材料商"}
+      ]
+    },
+    "半导体": {
+      "raw_material": "芯片/半导体设备",
+      "upstream_sector": "半导体产业链",
+      "description": "科技自主可控核心领域",
+      "price_keywords": ["芯片", "半导体", "光刻机", "国产替代", "AI芯片", "先进封装", "HBM"],
+      "stocks": [
+        {"name": "中芯国际", "code": "688981", "role": "晶圆代工龙头"},
+        {"name": "北方华创", "code": "002371", "role": "半导体设备龙头"},
+        {"name": "中微公司", "code": "688012", "role": "刻蚀设备龙头"},
+        {"name": "海光信息", "code": "688041", "role": "CPU/GPU设计"},
+        {"name": "韦尔股份", "code": "603501", "role": "CIS芯片龙头"},
+        {"name": "卓胜微", "code": "300782", "role": "射频芯片龙头"},
+        {"name": "长电科技", "code": "600584", "role": "封测龙头"}
+      ],
+      "links": [
+        {"event": "技术突破", "impact": "国产替代突破利好相关设备/材料商"},
+        {"event": "管制", "impact": "美国出口管制→国产替代加速"},
+        {"event": "需求爆发", "impact": "AI算力需求拉动芯片需求"},
+        {"event": "政策利好", "impact": "大基金投资/政策支持利好半导体"}
+      ]
+    },
+    "AI算力": {
+      "raw_material": "GPU/服务器/光模块",
+      "upstream_sector": "AI算力基础设施",
+      "description": "人工智能时代核心基础设施",
+      "price_keywords": ["算力", "AI服务器", "GPU", "光模块", "数据中心", "AI芯片", "CPO"],
+      "stocks": [
+        {"name": "中际旭创", "code": "300308", "role": "光模块龙头"},
+        {"name": "新易盛", "code": "300502", "role": "光模块龙头"},
+        {"name": "天孚通信", "code": "300394", "role": "光器件龙头"},
+        {"name": "工业富联", "code": "601138", "role": "AI服务器龙头"},
+        {"name": "浪潮信息", "code": "000977", "role": "AI服务器"},
+        {"name": "中科曙光", "code": "603019", "role": "算力基础设施"},
+        {"name": "英维克", "code": "002837", "role": "液冷温控龙头"}
+      ],
+      "links": [
+        {"event": "需求爆发", "impact": "AI应用爆发拉动算力需求→全产业链受益"},
+        {"event": "管制", "impact": "GPU出口管制→国产算力替代加速"},
+        {"event": "技术突破", "impact": "新技术路线利好供应链"}
+      ]
+    },
+    "电池": {
+      "raw_material": "锂/钴/镍/隔膜/电解液",
+      "upstream_sector": "电池制造",
+      "description": "新能源车+储能双轮驱动",
+      "price_keywords": ["电池", "锂电池", "固态电池", "钠电池", "储能", "动力电池"],
+      "stocks": [
+        {"name": "宁德时代", "code": "300750", "role": "动力电池龙头"},
+        {"name": "比亚迪", "code": "002594", "role": "刀片电池"},
+        {"name": "亿纬锂能", "code": "300014", "role": "电池龙头"},
+        {"name": "国轩高科", "code": "002074", "role": "磷酸铁锂电池"},
+        {"name": "欣旺达", "code": "300207", "role": "消费+动力电池"},
+        {"name": "鹏辉能源", "code": "300438", "role": "储能电池"}
+      ],
+      "links": [
+        {"event": "需求爆发", "impact": "储能/新能源车需求拉动"},
+        {"event": "技术突破", "impact": "固态电池/钠电突破利好材料商"},
+        {"event": "政策利好", "impact": "储能政策利好电池企业"}
+      ]
+    },
+    "大消费": {
+      "raw_material": "消费品牌/渠道",
+      "upstream_sector": "消费/零售",
+      "description": "中国内需消费核心资产",
+      "price_keywords": ["消费", "白酒", "免税", "旅游", "餐饮", "预制菜"],
+      "stocks": [
+        {"name": "贵州茅台", "code": "600519", "role": "白酒龙头"},
+        {"name": "五粮液", "code": "000858", "role": "浓香白酒龙头"},
+        {"name": "中国中免", "code": "601888", "role": "免税龙头"},
+        {"name": "海天味业", "code": "603288", "role": "调味品龙头"},
+        {"name": "美的集团", "code": "000333", "role": "家电龙头"},
+        {"name": "格力电器", "code": "000651", "role": "家电龙头"},
+        {"name": "伊利股份", "code": "600887", "role": "乳业龙头"}
+      ],
+      "links": [
+        {"event": "政策利好", "impact": "消费刺激政策利好消费板块"},
+        {"event": "需求爆发", "impact": "消费复苏/节假日效应"}
+      ]
+    },
+    "医药": {
+      "raw_material": "创新药/医疗器械",
+      "upstream_sector": "医药生物",
+      "description": "人口老龄化+创新驱动",
+      "price_keywords": ["创新药", "CXO", "医疗器械", "中药", "生物医药", "GLP-1"],
+      "stocks": [
+        {"name": "恒瑞医药", "code": "600276", "role": "创新药龙头"},
+        {"name": "百济神州", "code": "688235", "role": "创新药出海"},
+        {"name": "药明康德", "code": "603259", "role": "CXO龙头"},
+        {"name": "迈瑞医疗", "code": "300760", "role": "医疗器械龙头"},
+        {"name": "片仔癀", "code": "600436", "role": "中药龙头"},
+        {"name": "智飞生物", "code": "300122", "role": "疫苗龙头"}
+      ],
+      "links": [
+        {"event": "技术突破", "impact": "创新药获批/临床数据利好"},
+        {"event": "政策利好", "impact": "医药集采政策/医保谈判利好"},
+        {"event": "需求爆发", "impact": "人口老龄化+健康意识提升"}
       ]
     }
   },
@@ -175,6 +718,102 @@
     {"word": "供应短缺", "type": "停产", "material": null},
     {"word": "供需缺口", "type": "涨价", "material": null},
     {"word": "扩产", "type": "扩产", "material": null},
-    {"word": "产能", "type": "扩产", "material": null}
+    {"word": "产能", "type": "扩产", "material": null},
+    {"word": "碳酸锂", "type": "涨价", "material": "锂"},
+    {"word": "氢氧化锂", "type": "涨价", "material": "锂"},
+    {"word": "锂矿", "type": "停产", "material": "锂"},
+    {"word": "锂盐", "type": "涨价", "material": "锂"},
+    {"word": "锂精矿", "type": "涨价", "material": "锂"},
+    {"word": "赣锋锂业", "type": "涨价", "material": "锂"},
+    {"word": "天齐锂业", "type": "涨价", "material": "锂"},
+    {"word": "工业硅", "type": "涨价", "material": "硅"},
+    {"word": "多晶硅", "type": "涨价", "material": "硅"},
+    {"word": "有机硅", "type": "涨价", "material": "硅"},
+    {"word": "硅料", "type": "涨价", "material": "硅"},
+    {"word": "金属硅", "type": "涨价", "material": "硅"},
+    {"word": "电解铜", "type": "涨价", "material": "铜"},
+    {"word": "铜精矿", "type": "涨价", "material": "铜"},
+    {"word": "沪铜", "type": "涨价", "material": "铜"},
+    {"word": "紫金矿业", "type": "涨价", "material": "铜"},
+    {"word": "电解铝", "type": "涨价", "material": "铝"},
+    {"word": "氧化铝", "type": "涨价", "material": "铝"},
+    {"word": "沪铝", "type": "涨价", "material": "铝"},
+    {"word": "磷矿石", "type": "涨价", "material": "磷"},
+    {"word": "磷酸", "type": "涨价", "material": "磷"},
+    {"word": "磷化工", "type": "涨价", "material": "磷"},
+    {"word": "磷酸铁锂", "type": "涨价", "material": "磷"},
+    {"word": "黄磷", "type": "停产", "material": "磷"},
+    {"word": "纯碱", "type": "涨价", "material": "纯碱"},
+    {"word": "碳酸钠", "type": "涨价", "material": "纯碱"},
+    {"word": "电解钴", "type": "涨价", "material": "钴"},
+    {"word": "钴价", "type": "涨价", "material": "钴"},
+    {"word": "华友钴业", "type": "涨价", "material": "钴"},
+    {"word": "电解镍", "type": "涨价", "material": "镍"},
+    {"word": "镍铁", "type": "涨价", "material": "镍"},
+    {"word": "沪镍", "type": "涨价", "material": "镍"},
+    {"word": "天然气", "type": "涨价", "material": "天然气"},
+    {"word": "LNG", "type": "涨价", "material": "天然气"},
+    {"word": "尿素", "type": "涨价", "material": "尿素"},
+    {"word": "萤石", "type": "涨价", "material": "氟化工"},
+    {"word": "氢氟酸", "type": "涨价", "material": "氟化工"},
+    {"word": "制冷剂", "type": "涨价", "material": "氟化工"},
+    {"word": "原油", "type": "涨价", "material": "原油"},
+    {"word": "石油", "type": "涨价", "material": "原油"},
+    {"word": "WTI", "type": "涨价", "material": "原油"},
+    {"word": "布伦特", "type": "涨价", "material": "原油"},
+    {"word": "油价", "type": "涨价", "material": "原油"},
+    {"word": "黄金", "type": "涨价", "material": "黄金"},
+    {"word": "金价", "type": "涨价", "material": "黄金"},
+    {"word": "白银", "type": "涨价", "material": "白银"},
+    {"word": "银价", "type": "涨价", "material": "白银"},
+    {"word": "煤炭", "type": "涨价", "material": "煤炭"},
+    {"word": "动力煤", "type": "涨价", "material": "煤炭"},
+    {"word": "焦煤", "type": "涨价", "material": "煤炭"},
+    {"word": "中国神华", "type": "涨价", "material": "煤炭"},
+    {"word": "螺纹钢", "type": "涨价", "material": "钢铁"},
+    {"word": "热卷", "type": "涨价", "material": "钢铁"},
+    {"word": "铁矿石", "type": "涨价", "material": "钢铁"},
+    {"word": "钢价", "type": "涨价", "material": "钢铁"},
+    {"word": "纸浆", "type": "涨价", "material": "造纸"},
+    {"word": "纸价", "type": "涨价", "material": "造纸"},
+    {"word": "天然橡胶", "type": "涨价", "material": "橡胶"},
+    {"word": "合成橡胶", "type": "涨价", "material": "橡胶"},
+    {"word": "粮食", "type": "涨价", "material": "粮食"},
+    {"word": "玉米", "type": "涨价", "material": "粮食"},
+    {"word": "种子", "type": "涨价", "material": "粮食"},
+    {"word": "光伏", "type": "需求爆发", "material": "光伏"},
+    {"word": "组件", "type": "需求爆发", "material": "光伏"},
+    {"word": "隆基绿能", "type": "需求爆发", "material": "光伏"},
+    {"word": "海上风电", "type": "需求爆发", "material": "风电"},
+    {"word": "海风", "type": "需求爆发", "material": "风电"},
+    {"word": "新能源车", "type": "需求爆发", "material": "新能源汽车"},
+    {"word": "电动车", "type": "需求爆发", "material": "新能源汽车"},
+    {"word": "宁德时代", "type": "需求爆发", "material": "新能源汽车"},
+    {"word": "比亚迪", "type": "需求爆发", "material": "新能源汽车"},
+    {"word": "芯片", "type": "管制", "material": "半导体"},
+    {"word": "半导体", "type": "管制", "material": "半导体"},
+    {"word": "国产替代", "type": "管制", "material": "半导体"},
+    {"word": "算力", "type": "需求爆发", "material": "AI算力"},
+    {"word": "光模块", "type": "需求爆发", "material": "AI算力"},
+    {"word": "中际旭创", "type": "需求爆发", "material": "AI算力"},
+    {"word": "固态电池", "type": "技术突破", "material": "电池"},
+    {"word": "储能", "type": "需求爆发", "material": "电池"},
+    {"word": "白酒", "type": "政策利好", "material": "大消费"},
+    {"word": "免税", "type": "政策利好", "material": "大消费"},
+    {"word": "创新药", "type": "技术突破", "material": "医药"},
+    {"word": "GLP-1", "type": "技术突破", "material": "医药"},
+    {"word": "减肥药", "type": "需求爆发", "material": "医药"},
+    {"word": "CXO", "type": "技术突破", "material": "医药"},
+    {"word": "利好", "type": "政策利好", "material": null},
+    {"word": "利空", "type": "政策利空", "material": null},
+    {"word": "政策", "type": "政策利好", "material": null},
+    {"word": "补贴", "type": "政策利好", "material": null},
+    {"word": "需求", "type": "需求爆发", "material": null},
+    {"word": "技术突破", "type": "技术突破", "material": null},
+    {"word": "研发", "type": "技术突破", "material": null},
+    {"word": "地震", "type": "灾难", "material": null},
+    {"word": "洪水", "type": "灾难", "material": null},
+    {"word": "火灾", "type": "灾难", "material": null},
+    {"word": "事故", "type": "灾难", "material": null}
   ]
 }

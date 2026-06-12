@@ -31,8 +31,8 @@ module.exports = async function handler(req, res) {
 
     // === 2. 处理消息事件 ===
     const event = body.type === 'event_callback'
-      ? (body.event || body)
-      : (body.event || body);
+      ? (body.event || {})
+      : (body.event || {});
 
     const message = event.message || {};
     const sender = event.sender || {};
@@ -52,6 +52,12 @@ module.exports = async function handler(req, res) {
 
     // 去掉 @机器人
     content = content.replace(/@_user_\d+/g, '').replace(/@/g, '').trim();
+
+    // 截断过长内容（超过500字截断）
+    if (content.length > 500) {
+      content = content.slice(0, 500) + '...';
+    }
+
     if (!content) return res.status(200).json({ ok: true });
 
     // 判断私聊还是群聊
@@ -72,22 +78,19 @@ module.exports = async function handler(req, res) {
     await sendMessage(receiveId, receiveType,
       '🔍 正在分析，请稍候...');
 
-    // 执行分析 (规则匹配 + 搜索增强 + DeepSeek)
-    let result;
+    // 执行分析 (双通道: 规则匹配 + DeepSeek LLM)
+    let result = await analyze(content);
 
-    // 首先规则匹配
-    result = await analyze(content);
-
-    // 规则没命中 → 搜索补充背景再分析
-    if (result.noMatch || (!result.stocks || result.stocks.length === 0)) {
+    // 规则没命中 → 搜索补充背景 → 重新分析
+    if (result.noMatch || !result.stocks || result.stocks.length === 0) {
       const background = await searchNewsEnhancement(content);
       if (background) {
         result = await analyze(content, background);
       }
     }
 
-    // 还是没结果 → 尝试直接用 DeepSeek 裸分析
-    if (result.noMatch || (!result.stocks || result.stocks.length === 0)) {
+    // 还是没结果 → 二次尝试直接用 DeepSeek 裸分析（无背景版本）
+    if (result.noMatch || !result.stocks || result.stocks.length === 0) {
       const { analyzeWithLLM } = require('../lib/llm');
       const llmResult = await analyzeWithLLM(content);
       if (llmResult && llmResult.stocks && llmResult.stocks.length > 0) {
@@ -102,6 +105,7 @@ module.exports = async function handler(req, res) {
           })),
           signalStars: llmResult.signalStars,
           logicChain: llmResult.logicChain,
+          priceInfo: '',
           summary: llmResult.summary,
           fromLLM: true,
           descriptions: llmResult.summary ? [llmResult.summary] : []
