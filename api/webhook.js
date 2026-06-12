@@ -6,14 +6,30 @@
  *   → 规则匹配 (快速通道)
  *   → 没命中? → 搜索补充背景 → DeepSeek 分析 (通用通道)
  *   → 回复飞书
+ *
+ * 注意: 模块使用懒加载，降低冷启动时间
  */
 
-const { analyze } = require('../lib/engine');
-const { sendMessage, verifyWebhook } = require('../lib/feishu');
-const { buildSignalReport, buildDefaultReply, buildHelpText } = require('../lib/templates');
-const { searchNewsEnhancement } = require('../lib/search');
-
 const HELP_COMMANDS = ['帮助', 'help', 'usage', '菜单', 'start'];
+
+// 懒加载模块（避免冷启动时加载大文件）
+let _engine, _feishu, _templates, _search;
+function getEngine() {
+  if (!_engine) _engine = require('../lib/engine');
+  return _engine;
+}
+function getFeishu() {
+  if (!_feishu) _feishu = require('../lib/feishu');
+  return _feishu;
+}
+function getTemplates() {
+  if (!_templates) _templates = require('../lib/templates');
+  return _templates;
+}
+function getSearch() {
+  if (!_search) _search = require('../lib/search');
+  return _search;
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -23,11 +39,16 @@ module.exports = async function handler(req, res) {
   try {
     const body = req.body;
 
-    // === 1. 飞书 URL 验证 ===
-    const challenge = verifyWebhook(req);
-    if (challenge) {
-      return res.status(200).json(challenge);
+    // === 1. 飞书 URL 验证（最快路径，不加载任何模块） ===
+    if (body && body.challenge) {
+      return res.status(200).json({ challenge: body.challenge });
     }
+
+    // 延迟加载模块
+    const { analyze } = getEngine();
+    const { sendMessage } = getFeishu();
+    const { buildSignalReport, buildDefaultReply, buildHelpText } = getTemplates();
+    const { searchNewsEnhancement } = getSearch();
 
     // === 2. 处理消息事件 ===
     const event = body.type === 'event_callback'
@@ -127,6 +148,7 @@ module.exports = async function handler(req, res) {
     try {
       // 尝试通知用户出错了
       if (req.body?.event?.message?.chat_id) {
+        const { sendMessage } = require('../lib/feishu');
         await sendMessage(
           req.body.event.message.chat_id, 'chat_id',
           '⚠️ 分析出错了，请稍后重试'
