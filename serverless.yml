@@ -17,7 +17,7 @@ inputs:
     - .env
   runtime: Nodejs18.9
   region: ap-guangzhou
-  handler: scf_entry.main_handler
+  handler: index.main_handler
   timeout: 30
   memorySize: 256
   environment:
