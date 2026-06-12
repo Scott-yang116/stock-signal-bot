@@ -106,7 +106,45 @@ stock-buy/
 └── .env.example
 ```
 
-## 已覆盖的品种
+## 腾讯云部署
+
+### 方式一：云函数控制台（推荐，最简单）
+
+1. 打开 [腾讯云函数计算控制台](https://console.cloud.tencent.com/scf)
+2. 新建函数 → **从头开始** → 函数名称 `stock-signal-bot`
+3. 运行环境选择 **Nodejs 18.9** → 提交方法选 **本地上传 zip**
+4. 将项目目录打成 zip（排除 node_modules、.git），上传
+5. 创建 API 网关触发器：
+   - **触发方式**：API 网关触发
+   - **请求方法**：ANY
+   - **发布环境**：发布
+   - **启用集成响应**：✅ 开启
+6. 部署完成后，在 **函数配置** → 环境变量中添加：
+   - `FEISHU_APP_ID`
+   - `FEISHU_APP_SECRET`
+   - `DEEPSEEK_API_KEY`（可选）
+
+### 方式二：Serverless Framework CLI
+
+```bash
+npm install -g serverless
+serverless deploy
+```
+
+部署后拿到 **API 网关地址**（如 `https://service-xxx.gz.apigw.tencentcs.com/api/webhook`），去飞书后台填这个地址。
+
+## 飞书配置
+
+1. 打开 [飞书开放平台](https://open.feishu.cn) → 创建企业自建应用
+2. 启用**机器人**能力
+3. 在**事件订阅**中配置请求地址：
+   ```
+   https://你的域名/api/webhook
+   ```
+4. 订阅事件：`im.message.receive_v1`
+5. 发布应用
+
+## 文件结构
 
 内置 **28 种原料/行业** 的映射规则，覆盖:
 

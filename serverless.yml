@@ -1,0 +1,42 @@
+# 腾讯云 Serverless Framework 部署配置
+# 使用: serverless deploy
+
+app: stock-signal-bot
+stage: prod
+
+component: scf
+name: stock-signal-bot-scf
+
+inputs:
+  name: stock-signal-bot
+  src: ./
+  exclude:
+    - .git
+    - .gitignore
+    - node_modules
+    - .env
+  runtime: Nodejs18.9
+  region: ap-guangzhou
+  handler: scf_entry.main_handler
+  timeout: 30
+  memorySize: 256
+  environment:
+    variables:
+      FEISHU_APP_ID: ${env.FEISHU_APP_ID}
+      FEISHU_APP_SECRET: ${env.FEISHU_APP_SECRET}
+      DEEPSEEK_API_KEY: ${env.DEEPSEEK_API_KEY}
+      TAVILY_API_KEY: ${env.TAVILY_API_KEY}
+  events:
+    - apigw:
+        name: stock-signal-bot-apigw
+        parameters:
+          protocols:
+            - http
+            - https
+          service:
+            function: true
+          apis:
+            - path: /api/webhook
+              method: ANY
+              function:
+                isIntegratedResponse: true
